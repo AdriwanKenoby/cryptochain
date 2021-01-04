@@ -56,7 +56,6 @@ router.post('/transact', passport.authenticate('bearer', { session: false }), (r
       doc.save();
     }
   } catch(err) {
-    console.log(err);
     return next(createError(400));
   }
 

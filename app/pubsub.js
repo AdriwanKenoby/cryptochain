@@ -32,6 +32,7 @@ class PubSub {
         });
         this.io.emit('transaction');
         this.io.emit('blocks');
+        this.io.emit('wallet');
         break;
       case CHANNELS.TRANSACTION:
         this.transactionPool.setTransaction(parsedMessage);
