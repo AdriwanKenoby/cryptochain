@@ -15,8 +15,8 @@ describe('Transaction', () => {
     transaction = new Transaction({ senderWallet, recipient, amount });
   });
 
-  it('has an `id`', () => {
-    expect(transaction).toHaveProperty('id');
+  it('has an `_id`', () => {
+    expect(transaction).toHaveProperty('_id');
   });
 
   describe('outputMap', () => {
