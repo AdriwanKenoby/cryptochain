@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/AdriwanKenoby/cryptochain.svg?branch=master)](https://travis-ci.com/AdriwanKenoby/cryptochain)
+
 ### Build a Blockchain and Cryptocurrency | Full-Stack Edition
 
 The official code for the *Build a Blockchain and Cryptocurrency | Full-Stack Edition* course on Udemy by David Katz.
