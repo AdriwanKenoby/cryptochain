@@ -1,0 +1,10 @@
+dist: bionic
+language: node_js
+node_js:
+  - lts/*
+
+script: 'jest tests'
+
+services:
+  - mongodb
+  - redis-server
