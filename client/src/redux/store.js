@@ -1,4 +1,4 @@
-import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit'
 import {
   persistReducer,
   FLUSH,
@@ -7,17 +7,17 @@ import {
   PERSIST,
   PURGE,
   REGISTER
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import logger from 'redux-logger';
-import authReducer from './features/auth/authSlice';
-import walletReducer from './features/wallet/walletSlice';
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import logger from 'redux-logger'
+import authReducer from './features/auth/authSlice'
+import walletReducer from './features/wallet/walletSlice'
 
 const authPersistedReducer = persistReducer({
   key: 'auth',
   version: 1,
   storage
-}, authReducer);
+}, authReducer)
 
 const walletPersistedReducer = persistReducer({
   key: 'wallet',
@@ -36,7 +36,6 @@ const store = configureStore({
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
     }
   }).concat(logger)
-});
+})
 
-
-export default store;
+export default store

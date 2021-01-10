@@ -1,3 +1,3 @@
-const io = require('socket.io')();
+const io = require('socket.io')()
 
-module.exports = io;
+module.exports = io

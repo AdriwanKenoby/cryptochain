@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const { transactionSchema } = require('./transactions');
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const { transactionSchema } = require('./transactions')
 
 const blockSchema = new Schema({
   timestamp: {
@@ -29,6 +29,6 @@ const blockSchema = new Schema({
     type: Number,
     required: true
   }
-}, { versionKey: false });
+}, { versionKey: false })
 
-module.exports = mongoose.model('blocks', blockSchema);
+module.exports = mongoose.model('blocks', blockSchema)

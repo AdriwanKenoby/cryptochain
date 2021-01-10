@@ -1,4 +1,4 @@
-import { header } from '../helpers/header';
+import { header } from '../helpers/header'
 
 const fetchTransactionPoolMap = () => {
   return fetch(`${document.location.origin}/api/transaction-pool-map`, {
@@ -7,11 +7,11 @@ const fetchTransactionPoolMap = () => {
       'Content-Type': 'application/json'
     }
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.json();
-  });
-};
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
+    })
+}
 
 const fetchMineTransactions = () => {
   return fetch(`${document.location.origin}/api/mine-transactions`, {
@@ -20,13 +20,13 @@ const fetchMineTransactions = () => {
       'Content-Type': 'application/json'
     }
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.json();
-  });
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
+    })
 }
 
 export const transactionPoolAPI = {
   fetchTransactionPoolMap,
   fetchMineTransactions
-};
+}

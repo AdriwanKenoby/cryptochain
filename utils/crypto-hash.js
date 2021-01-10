@@ -1,21 +1,20 @@
-'use strict';
+'use strict'
 
-const crypto = require('crypto');
+const crypto = require('crypto')
 
 const cryptoHash = (...inputs) => {
-  const hash = crypto.createHash('sha256');
+  const hash = crypto.createHash('sha256')
   hash.update(inputs.map(input => {
-    if(input instanceof Array) {
-      return cryptoHash(...input);
+    if (input instanceof Array) {
+      return cryptoHash(...input)
     }
-    if(input instanceof Object) {
-      return Object.entries(input).sort().flat();
+    if (input instanceof Object) {
+      return Object.entries(input).sort().flat()
     }
-    return JSON.stringify(input);
+    return JSON.stringify(input)
+  }).sort().join(' '))
 
-  }).sort().join(' '));
+  return hash.digest('hex')
+}
 
-  return hash.digest('hex');
-};
-
-module.exports = cryptoHash;
+module.exports = cryptoHash

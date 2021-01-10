@@ -1,4 +1,4 @@
-import { header } from '../helpers/header';
+import { header } from '../helpers/header'
 
 const fetchWalletInfo = () => {
   return fetch(`${document.location.origin}/api/wallet-info`, {
@@ -7,11 +7,11 @@ const fetchWalletInfo = () => {
       'Content-Type': 'application/json'
     }
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.json();
-  });
-};
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
+    })
+}
 
 const fetchCreateWallet = ({ privateKey }) => {
   return fetch(`${document.location.origin}/api/create-wallet`, {
@@ -20,13 +20,13 @@ const fetchCreateWallet = ({ privateKey }) => {
       ...header(),
       'Content-Type': 'application/json'
     },
-    ...( privateKey && { body: JSON.stringify({ privateKey })} )
+    ...(privateKey && { body: JSON.stringify({ privateKey }) })
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.json()
-  });
-};
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
+    })
+}
 
 const fetchCreateMiner = () => {
   return fetch(`${document.location.origin}/api/create-miner`, {
@@ -34,16 +34,16 @@ const fetchCreateMiner = () => {
     headers: {
       ...header(),
       'Content-Type': 'application/json'
-    },
+    }
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.json()
-  });
-};
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
+    })
+}
 
 export const walletAPI = {
   fetchWalletInfo,
   fetchCreateWallet,
   fetchCreateMiner
-};
+}

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Form, FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { login } from '../../redux/features/auth/authSlice';
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Form, FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { login } from '../../redux/features/auth/authSlice'
 
 const SignIn = () => {
-  const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  return(
+  return (
     <Form>
       <FormGroup>
         <FormLabel>Email Address</FormLabel>
@@ -39,7 +39,7 @@ const SignIn = () => {
         onClick={() => dispatch(login({ email, password }))}
       >Submit</Button>
     </Form>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn

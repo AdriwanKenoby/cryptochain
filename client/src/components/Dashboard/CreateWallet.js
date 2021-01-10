@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Form, FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { openWallet } from '../../redux/features/wallet/walletSlice';
+import React, { useState } from 'react'
+import { Form, FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
+import { openWallet } from '../../redux/features/wallet/walletSlice'
 
 const CreateWallet = () => {
+  const dispatch = useDispatch()
+  const [hasPrivateKey, setHasPrivateKey] = useState(false)
+  const [privateKey, setPrivateKey] = useState('')
 
-  const dispatch = useDispatch();
-  const [hasPrivateKey, setHasPrivateKey] = useState(false);
-  const [privateKey, setPrivateKey] = useState('');
-
-  if(!hasPrivateKey) return (
+  if (!hasPrivateKey) {
+    return (
     <div className='CreateWallet'>
       <h3>Create a new Wallet</h3>
       <Button
@@ -23,9 +23,10 @@ const CreateWallet = () => {
         onClick={() => dispatch(openWallet({}))}
       >Go</Button>
     </div>
-  );
+    )
+  }
 
-  return(
+  return (
     <div className='CreateWallet'>
       <h3>Re-create wallet from private key</h3>
       <Form>
@@ -50,7 +51,7 @@ const CreateWallet = () => {
         >Go</Button>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default CreateWallet;
+export default CreateWallet

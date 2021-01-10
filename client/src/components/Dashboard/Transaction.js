@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 const Transaction = ({ transaction }) => {
-  const { input, outputMap } = transaction;
-  const recipients = Object.keys(outputMap);
+  const { input, outputMap } = transaction
+  const recipients = Object.keys(outputMap)
 
   return (
     <div className='Transaction'>
@@ -17,7 +17,7 @@ const Transaction = ({ transaction }) => {
         }
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Transaction;
+export default Transaction

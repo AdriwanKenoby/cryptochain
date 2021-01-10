@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const AddressSchema = new Schema({
   user: {
@@ -13,6 +13,6 @@ const AddressSchema = new Schema({
     type: String,
     required: true
   }
-});
+})
 
-module.exports = mongoose.model('addresses', AddressSchema);
+module.exports = mongoose.model('addresses', AddressSchema)

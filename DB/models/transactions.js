@@ -1,16 +1,16 @@
-'use strict';
+'use strict'
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const BN = require('bn.js');
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const BN = require('bn.js')
 
 const convertToString = (val) => {
-  return val.toString(16);
-};
+  return val.toString(16)
+}
 
 const convertToBN = (val) => {
-  return new BN(val, 16);
-};
+  return new BN(val, 16)
+}
 
 const transactionSchema = new Schema({
   _id: {
@@ -22,7 +22,7 @@ const transactionSchema = new Schema({
       required: true
     },
     amount: {
-      type: Number,
+      type: Number
     },
     address: {
       type: String,
@@ -46,8 +46,7 @@ const transactionSchema = new Schema({
     type: Schema.Types.Mixed,
     required: true
   }
-}, { versionKey: false });
-
+}, { versionKey: false })
 
 module.exports = {
   Transaction: mongoose.model('transactions', transactionSchema),

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Nav, NavItem, Button } from 'react-bootstrap';
-import Logout from './Home/Logout';
-import logo from '../assets/logo.png';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Nav, NavItem, Button } from 'react-bootstrap'
+import Logout from './Home/Logout'
+import logo from '../assets/logo.png'
 
 const download = () => {
   fetch(`${document.location.origin}/api/download`, {
@@ -10,30 +10,30 @@ const download = () => {
       'Content-Type': 'application/json'
     }
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.blob();
-  })
-  .then( blob => link(blob))
-  .catch(err => alert(err.message));
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.blob()
+    })
+    .then(blob => link(blob))
+    .catch(err => alert(err.message))
 }
 
 const link = (blob) => {
-  const url = window.URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `blockchain-${Date.now()}.json`;
-   // 3. Append to html page
-   document.body.appendChild(link);
-   // 4. Force download
-   link.click();
-   // 5. Clean up and remove the link
-   window.URL.revokeObjectURL(url);
-   link.remove();
+  const url = window.URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `blockchain-${Date.now()}.json`
+  // 3. Append to html page
+  document.body.appendChild(link)
+  // 4. Force download
+  link.click()
+  // 5. Clean up and remove the link
+  window.URL.revokeObjectURL(url)
+  link.remove()
 }
 
 const Header = ({ ...props }) => {
-  return(
+  return (
     <header>
       <nav className='navbar bg-dark navbar-dark'>
         <img className='logo navbar-brand' src={logo}></img>
@@ -52,7 +52,7 @@ const Header = ({ ...props }) => {
         </Nav>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

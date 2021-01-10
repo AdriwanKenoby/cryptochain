@@ -1,103 +1,102 @@
 #!/usr/bin/env node
 
-'use strict';
+'use strict'
 
 /**
  * Load environment variables
  */
- const dotenv = require('dotenv');
- const config = dotenv.config();
+const dotenv = require('dotenv')
+const config = dotenv.config()
 
- if (config.error) {
-   throw config.error
- }
+if (config.error) {
+  throw config.error
+}
 
 /**
  * Module dependencies.
  */
-const app = require('../app');
-const debug = require('debug')('cryptochain:server');
-const http = require('http');
-const io = require('../app/io');
-const Blockchain = require('../blockchain');
-const Wallet = require('../wallet');
-const Miner = require('../miner');
-const Block = require('../DB/models/blocks');
-const Address = require('../DB/models/addresses');
-const { Transaction: TransactionModel } = require('../DB/models/transactions');
-const Transaction = require('../wallet/transaction');
+const app = require('../app')
+const debug = require('debug')('cryptochain:server')
+const http = require('http')
+const io = require('../app/io')
+const Wallet = require('../wallet')
+const Miner = require('../miner')
+const Block = require('../DB/models/blocks')
+const Address = require('../DB/models/addresses')
+const { Transaction: TransactionModel } = require('../DB/models/transactions')
+const Transaction = require('../wallet/transaction')
 /**
  * Get port from environment and store in Express.
  */
 
-const DEFAULT_PORT = process.env.PORT || 3000;
+const DEFAULT_PORT = process.env.PORT || 3000
 
-const port = normalizePort(DEFAULT_PORT);
-app.set('port', port);
-app.set('env', process.env.NODE_ENV);
+const port = normalizePort(DEFAULT_PORT)
+app.set('port', port)
+app.set('env', process.env.NODE_ENV)
 
 /**
  * Create HTTP server and attach socket.io server to it.
  */
 
-const server = http.createServer(app);
-io.attach(server);
+const server = http.createServer(app)
+io.attach(server)
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port, () => {
-  reload();
-});
-server.on('error', onError);
-server.on('listening', onListening);
+  reload()
+})
+server.on('error', onError)
+server.on('listening', onListening)
 
 /**
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val) {
-  const port = parseInt(val, 10);
+function normalizePort (val) {
+  const port = parseInt(val, 10)
 
   if (isNaN(port)) {
     // named pipe
-    return val;
+    return val
   }
 
   if (port >= 0) {
     // port number
-    return port;
+    return port
   }
 
-  return false;
+  return false
 }
 
 /**
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+function onError (error) {
   if (error.syscall !== 'listen') {
-    throw error;
+    throw error
   }
 
   const bind = typeof port === 'string'
     ? 'Pipe ' + port
-    : 'Port ' + port;
+    : 'Port ' + port
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
+      console.error(bind + ' requires elevated privileges')
+      process.exit(1)
+      break
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
+      console.error(bind + ' is already in use')
+      process.exit(1)
+      break
     default:
-      throw error;
+      throw error
   }
 }
 
@@ -105,12 +104,12 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
-  const addr = server.address();
+function onListening () {
+  const addr = server.address()
   const bind = typeof addr === 'string'
     ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+    : 'port ' + addr.port
+  debug('Listening on ' + bind)
 }
 
 /**
@@ -119,90 +118,94 @@ function onListening() {
 
 const reload = () => {
   TransactionModel.find().lean().exec((err, transactions) => {
-    if(err) console.error(err.message);
-    console.log('reload transactionPoolMap from DB', transactions);
+    if (err) console.error(err.message)
+    console.log('reload transactionPoolMap from DB', transactions)
     app.locals.transactionPool.setMap(
       transactions.reduce((obj, item) => {
-        return {...obj, [item['_id']]: new Transaction({
-          input: item['input'],
-          outputMap: item['outputMap'],
-          id: item['_id'] }) }
+        return {
+          ...obj,
+          [item._id]: new Transaction({
+            input: item.input,
+            outputMap: item.outputMap,
+            id: item._id
+          })
+        }
       }, {})
-    );
-  });
+    )
+  })
 
   Block.find().lean().sort('timestamp').exec((err, blocks) => {
-    if(err) console.error(err.message);
-    console.log('reload chain from DB', blocks);
-    app.locals.blockchain.replaceChain(blocks, true);
-  });
+    if (err) console.error(err.message)
+    console.log('reload chain from DB', blocks)
+    app.locals.blockchain.replaceChain(blocks, true)
+  })
 
   Address.find().lean().populate('user').exec((err, addresses) => {
-    console.log('reload known addresses from DB', addresses);
-    addresses.map( address => Wallet.knownAddresses.set(address.key, address.user.username));
-  });
-};
+    if (err) console.error(err.message)
+    console.log('reload known addresses from DB', addresses)
+    addresses.map(address => Wallet.knownAddresses.set(address.key, address.user.username))
+  })
+}
 
 if (app.get('env') === 'test') {
-	const wallet1 = new Wallet({ username: 'toto' }),
-	wallet2 = new Wallet({ username: 'titi' }),
-  wallet3 = new Wallet({ username: 'tata' });
+  const wallet1 = new Wallet({ username: 'toto' })
+  const wallet2 = new Wallet({ username: 'titi' })
+  const wallet3 = new Wallet({ username: 'tata' })
 
   const miner1 = new Miner({
     blockchain: app.locals.blockchain,
     transactionPool: app.locals.transactionPool,
     wallet: wallet1,
     pubsub: app.locals.pubsub
-  });
+  })
 
   const miner2 = new Miner({
     blockchain: app.locals.blockchain,
     transactionPool: app.locals.transactionPool,
     wallet: wallet2,
     pubsub: app.locals.pubsub
-  });
+  })
 
   const miner3 = new Miner({
     blockchain: app.locals.blockchain,
     transactionPool: app.locals.transactionPool,
     wallet: wallet3,
     pubsub: app.locals.pubsub
-  });
+  })
 
-	const generateWalletTransaction = ({ wallet, recipient, amount }) => {
-		const transaction = wallet.createTransaction({
-			recipient, amount, chain: app.locals.blockchain.chain
-		});
+  const generateWalletTransaction = ({ wallet, recipient, amount }) => {
+    const transaction = wallet.createTransaction({
+      recipient, amount, chain: app.locals.blockchain.chain
+    })
 
-		app.locals.transactionPool.setTransaction(transaction);
-	};
+    app.locals.transactionPool.setTransaction(transaction)
+  }
 
-	const walletAction = () => generateWalletTransaction({
-		wallet: wallet3, recipient: wallet1.publicKey, amount: 5
-	});
+  const walletAction = () => generateWalletTransaction({
+    wallet: wallet3, recipient: wallet1.publicKey, amount: 5
+  })
 
-	const wallet1Action = () => generateWalletTransaction({
-		wallet: wallet1, recipient: wallet2.publicKey, amount: 10
-	});
+  const wallet1Action = () => generateWalletTransaction({
+    wallet: wallet1, recipient: wallet2.publicKey, amount: 10
+  })
 
-	const wallet2Action = () => generateWalletTransaction({
-		wallet: wallet2, recipient: wallet3.publicKey, amount: 15
-	});
+  const wallet2Action = () => generateWalletTransaction({
+    wallet: wallet2, recipient: wallet3.publicKey, amount: 15
+  })
 
-
-	for ( let i=0; i < 11 ; i++) {
-		if (i%3 === 0) {
-			walletAction();
-			wallet1Action();
-      miner1.mineTransactions();
-		} else if (i%3 === 1) {
-			walletAction();
-			wallet2Action();
-      miner2.mineTransactions();
-		} else {
-			wallet1Action();
-			wallet2Action();
-      miner3.mineTransactions();
-		}
-	}
+  for (let i = 0; i < 11; i++) {
+    if (i % 3 === 0) {
+      walletAction()
+      wallet1Action()
+      miner1.mineTransactions()
+    } else if (i % 3 === 1) {
+      walletAction()
+      wallet2Action()
+      miner2.mineTransactions()
+    } else {
+      wallet1Action()
+      wallet2Action()
+      miner3.mineTransactions()
+    }
+  }
 }

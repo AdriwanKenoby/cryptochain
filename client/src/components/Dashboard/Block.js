@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import Transaction from './Transaction';
-import { Button } from 'react-bootstrap';
+import React, { useState } from 'react'
+import Transaction from './Transaction'
+import { Button } from 'react-bootstrap'
 
 const Block = ({ block }) => {
+  const [displayTransaction, setDisplayTransaction] = useState(false)
+  const { timestamp, hash, data } = block
+  const hashDisplay = `${hash.substring(0, 15)}...`
+  const stringifiedData = JSON.stringify(data)
+  const dataDisplay = stringifiedData.length > 35 ? `${stringifiedData.substring(0, 35)}...` : stringifiedData
 
-  const [displayTransaction, setDisplayTransaction] = useState(false);
-  const { timestamp, hash, data } = block;
-  const hashDisplay = `${hash.substring(0, 15)}...`;
-  const stringifiedData = JSON.stringify(data);
-  const dataDisplay = stringifiedData.length > 35 ? `${stringifiedData.substring(0, 35)}...` : stringifiedData;
-
-
-  if(displayTransaction) return(
+  if (displayTransaction) {
+    return (
     <div className='Block transform transform-active'>
       <p>Hash: {hashDisplay}</p>
       <Button
@@ -28,9 +27,10 @@ const Block = ({ block }) => {
         }
       </div>
     </div>
-  );
+    )
+  }
 
-  return(
+  return (
     <div className='Block transform'>
       <p>Hash: {hashDisplay}</p>
       <Button
@@ -42,7 +42,7 @@ const Block = ({ block }) => {
         <p>Data: {dataDisplay}</p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Block;
+export default Block

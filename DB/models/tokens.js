@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-var timestamps = require('mongoose-timestamp');
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const timestamps = require('mongoose-timestamp')
 
 const TokenSchema = new Schema({
   jwt: {
@@ -14,10 +14,10 @@ const TokenSchema = new Schema({
     ref: 'users',
     required: true
   }
-});
+})
 
-TokenSchema.plugin(timestamps);
+TokenSchema.plugin(timestamps)
 
-TokenSchema.index({ updatedAt: 1 }, { expireAfterSeconds: 3600 });
+TokenSchema.index({ updatedAt: 1 }, { expireAfterSeconds: 3600 })
 
-module.exports = mongoose.model('tokens', TokenSchema);
+module.exports = mongoose.model('tokens', TokenSchema)

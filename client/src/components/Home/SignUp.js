@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Form, FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { register } from '../../redux/features/auth/authSlice';
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Form, FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { register } from '../../redux/features/auth/authSlice'
 
 const SignUp = () => {
-  const dispatch = useDispatch();
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirm, setConfirm] = useState('');
+  const dispatch = useDispatch()
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirm, setConfirm] = useState('')
 
-  return(
+  return (
     <Form>
       <FormGroup>
         <FormLabel>Username</FormLabel>
@@ -58,12 +58,12 @@ const SignUp = () => {
         variant='danger'
         size='sm'
         onClick={() => {
-          if(password !== confirm) return alert('password must match confirm');
+          if (password !== confirm) return alert('password must match confirm')
           else dispatch(register({ username, email, password }))
         }}
       >Submit</Button>
     </Form>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

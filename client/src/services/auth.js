@@ -1,4 +1,4 @@
-import { header } from '../helpers/header';
+import { header } from '../helpers/header'
 
 const fetchSignIn = ({ email, password }) => {
   return fetch(`${document.location.origin}/auth/signin`, {
@@ -6,10 +6,10 @@ const fetchSignIn = ({ email, password }) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password })
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.json();
-  });
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
+    })
 }
 
 const fetchSignUp = ({ username, email, password }) => {
@@ -18,11 +18,11 @@ const fetchSignUp = ({ username, email, password }) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, email, password })
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.json();
-  });
-};
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
+    })
+}
 
 const fetchLogout = () => {
   return fetch(`${document.location.origin}/auth/logout`, {
@@ -32,11 +32,11 @@ const fetchLogout = () => {
       'Content-Type': 'application/json'
     }
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.json();
-  });
-};
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
+    })
+}
 
 const fetchForgetPassword = ({ email }) => {
   return fetch(`${document.location.origin}/auth/password-forgotten`, {
@@ -46,11 +46,11 @@ const fetchForgetPassword = ({ email }) => {
     },
     body: JSON.stringify({ email })
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.json();
-  });
-};
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
+    })
+}
 
 const fetchResetPassword = ({ id, token, password }) => {
   return fetch(`${document.location.origin}/auth/reset-password/${id}/${token}`, {
@@ -60,11 +60,11 @@ const fetchResetPassword = ({ id, token, password }) => {
     },
     body: JSON.stringify({ password })
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.json();
-  });
-};
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
+    })
+}
 
 export const authAPI = {
   fetchSignIn,
@@ -72,4 +72,4 @@ export const authAPI = {
   fetchLogout,
   fetchForgetPassword,
   fetchResetPassword
-};
+}

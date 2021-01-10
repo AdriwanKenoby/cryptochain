@@ -1,19 +1,19 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import AuthRoute from './Routes/AuthRoute';
-import PrivateRoute from './Routes/PrivateRoute';
-import SignIn from './Home/SignIn';
-import SignUp from './Home/SignUp';
-import ForgetPassword from './Home/ForgetPassword';
-import ResetPassword from './Home/ResetPassword';
-import Layout from './Layout';
-import Menu from './Dashboard/Menu';
-import Blocks from './Dashboard/Blocks';
-import ConductTransaction from './Dashboard/ConductTransaction';
-import TransactionPool from './Dashboard/TransactionPool';
+import React from 'react'
+import { BrowserRouter, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+import AuthRoute from './Routes/AuthRoute'
+import PrivateRoute from './Routes/PrivateRoute'
+import SignIn from './Home/SignIn'
+import SignUp from './Home/SignUp'
+import ForgetPassword from './Home/ForgetPassword'
+import ResetPassword from './Home/ResetPassword'
+import Layout from './Layout'
+import Menu from './Dashboard/Menu'
+import Blocks from './Dashboard/Blocks'
+import ConductTransaction from './Dashboard/ConductTransaction'
+import TransactionPool from './Dashboard/TransactionPool'
 
-const mapState = state => ({ isLogged: state.auth.isLogged });
+const mapState = state => ({ isLogged: state.auth.isLogged })
 
 const App = ({ ...props }) => {
   return (
@@ -31,7 +31,7 @@ const App = ({ ...props }) => {
         </Switch>
       </Layout>
     </BrowserRouter>
-  );
+  )
 }
 
-export default connect(mapState)(App);
+export default connect(mapState)(App)

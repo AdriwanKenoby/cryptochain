@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { useDispatch } from 'react-redux';
-import { Button } from 'react-bootstrap';
-import { logout } from '../../redux/features/auth/authSlice';
+import React, { Component } from 'react'
+import { useDispatch } from 'react-redux'
+import { Button } from 'react-bootstrap'
+import { logout } from '../../redux/features/auth/authSlice'
 
 const Logout = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  return(
+  return (
     <Button
       variant='danger'
       size='sm'
       onClick={() => dispatch(logout())}
     >Logout</Button>
-  );
+  )
 }
 
-export default Logout;
+export default Logout

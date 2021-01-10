@@ -1,4 +1,4 @@
-import { header } from '../helpers/header';
+import { header } from '../helpers/header'
 
 const fetchConductTransaction = ({ recipient, amount }) => {
   return fetch(`${document.location.origin}/api/transact`, {
@@ -9,26 +9,26 @@ const fetchConductTransaction = ({ recipient, amount }) => {
     },
     body: JSON.stringify({ recipient, amount })
   })
-  .then( res => {
-    if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-    return res.json();
-  });
-};
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
+    })
+}
 
 const fetchKnownAddresses = () => {
   return fetch(`${document.location.origin}/api/known-addresses`, {
-      headers: {
-        ...header(),
-        'Content-Type': 'application/json'
-      }
+    headers: {
+      ...header(),
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(res => {
+      if (!res.ok) throw new Error(`Request rejected with status ${res.status}`)
+      return res.json()
     })
-    .then( res => {
-      if(!res.ok) throw new Error(`Request rejected with status ${res.status}`);
-      return res.json();
-    });
-};
+}
 
 export const transactionAPI = {
   fetchConductTransaction,
   fetchKnownAddresses
-};
+}
