@@ -6,7 +6,7 @@ import { authAPI } from '../../services'
 class ForgetPassword extends Component {
   state = { email: '' };
 
-  #forgetPassword = () => {
+  forgetPassword = () => {
     authAPI.fetchForgetPassword({ email: this.state.email })
       .then(json => {
         alert(json.type || json.message)
@@ -31,7 +31,7 @@ class ForgetPassword extends Component {
         <Button
           variant='danger'
           size='sm'
-          onClick={this.#forgetPassword}
+          onClick={this.forgetPassword}
         >Submit</Button>
       </Form>
     )

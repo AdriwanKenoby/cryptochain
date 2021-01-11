@@ -13,7 +13,7 @@ class TransactionPool extends Component {
       .catch(err => alert(err.message))
   }
 
-  #fetchMineTransactions = () => {
+  fetchMineTransactions = () => {
     transactionPoolAPI.fetchMineTransactions()
       .then(json => {
         alert(json.message || json.type)
@@ -48,7 +48,7 @@ class TransactionPool extends Component {
         <Button
           variant='danger'
           size='sm'
-          onClick={this.#fetchMineTransactions}>Mine the Transactions</Button>
+          onClick={this.fetchMineTransactions}>Mine the Transactions</Button>
       </div>
     )
   }

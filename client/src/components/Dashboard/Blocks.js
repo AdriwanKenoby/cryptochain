@@ -7,29 +7,29 @@ import io from 'socket.io-client'
 class Blocks extends Component {
   state = { blocks: [], paginatedId: 1, blocksLength: 0 }
 
-  #fetchLength = () => {
+  fetchLength = () => {
     return blockchainAPI.fetchBlockchainLength()
       .then(json => this.setState({ blocksLength: json }))
   }
 
-  #fetchBlockchain = id => {
+  fetchBlockchain = id => {
     return blockchainAPI.fetchPaginatedBlocks(id)
       .then(json => this.setState({ blocks: json }))
   }
 
-  #fetchInfo = () => {
-    this.#fetchLength()
+  fetchInfo = () => {
+    this.fetchLength()
       .catch(err => alert(err.message))
-    this.#fetchBlockchain(this.state.paginatedId)
+    this.fetchBlockchain(this.state.paginatedId)
       .catch(err => alert(err.message))
   }
 
   componentDidMount () {
     this.socket = io()
     this.socket.on('blocks', () => {
-      this.#fetchInfo()
+      this.fetchInfo()
     })
-    this.#fetchInfo()
+    this.fetchInfo()
   }
 
   componentWillUnmount () {
@@ -46,7 +46,7 @@ class Blocks extends Component {
             const id = key + 1
             return (
               <span key={key} onClick={() => {
-                this.setState({ paginatedId: id }, () => this.#fetchInfo())
+                this.setState({ paginatedId: id }, () => this.fetchInfo())
               } }>
                 <Button
                   variant='info'
