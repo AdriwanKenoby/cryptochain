@@ -43,7 +43,7 @@ const CreateWallet = () => {
           variant='info'
           size='sm'
           onClick={() => setHasPrivateKey(false)}
-        >I haven't got private key</Button>
+        >I haven&apos;t got private key</Button>
         <Button
           variant='danger'
           size='sm'

@@ -2,3 +2,4 @@ node_modules/
 client/dist/
 client/.cache/
 blockchain-file.json
+package-lock.json

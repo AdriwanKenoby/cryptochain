@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import { walletAPI } from '../../services'
 import io from 'socket.io-client'
 

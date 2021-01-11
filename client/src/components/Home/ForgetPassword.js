@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
-import { Form, FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { authAPI } from '../../services';
+import React, { Component } from 'react'
+import { Form, FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { authAPI } from '../../services'
 
 class ForgetPassword extends Component {
-
   state = { email: '' };
 
   #forgetPassword = () => {
     authAPI.fetchForgetPassword({ email: this.state.email })
-    .then(json => {
-      alert(json.type || json.message);
-    })
-    .catch(err => alert(err.message));
+      .then(json => {
+        alert(json.type || json.message)
+      })
+      .catch(err => alert(err.message))
   }
 
-  render() {
-    return(
+  render () {
+    return (
       <Form>
         <FormGroup>
           <FormLabel>Email</FormLabel>
@@ -35,8 +34,8 @@ class ForgetPassword extends Component {
           onClick={this.#forgetPassword}
         >Submit</Button>
       </Form>
-    );
+    )
   }
 }
 
-export default ForgetPassword;
+export default ForgetPassword
