@@ -1,5 +1,3 @@
-'use strict'
-
 const { GENESIS_DATA, MINE_RATE } = require('../config')
 const { cryptoHash } = require('../utils')
 const hexToBinary = require('hex-to-binary')

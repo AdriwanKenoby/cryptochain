@@ -1,5 +1,3 @@
-'use strict'
-
 const { cryptoHash } = require('../../utils')
 
 describe('cryptoHash()', () => {

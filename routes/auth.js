@@ -1,5 +1,3 @@
-'use strict'
-
 const crypto = require('crypto')
 const os = require('os')
 const express = require('express')

@@ -1,5 +1,3 @@
-'use strict'
-
 const { STARTING_BALANCE, REWARD_INPUT } = require('../config')
 const { ec, cryptoHash } = require('../utils')
 const Transaction = require('./transaction')

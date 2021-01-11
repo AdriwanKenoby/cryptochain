@@ -1,5 +1,3 @@
-'use strict'
-
 const Transaction = require('./transaction')
 
 class TransactionPool {

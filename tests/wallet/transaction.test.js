@@ -1,5 +1,3 @@
-'use strict'
-
 const Wallet = require('../../wallet')
 const Transaction = require('../../wallet/transaction')
 const { verifySignature } = require('../../utils')

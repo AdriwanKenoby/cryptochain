@@ -1,5 +1,3 @@
-'use strict'
-
 const Blockchain = require('../../blockchain')
 const Block = require('../../blockchain/block')
 const { cryptoHash } = require('../../utils')

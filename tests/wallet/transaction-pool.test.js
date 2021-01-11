@@ -1,5 +1,3 @@
-'use strict'
-
 const TransactionPool = require('../../wallet/transaction-pool')
 const Transaction = require('../../wallet/transaction')
 const Wallet = require('../../wallet')

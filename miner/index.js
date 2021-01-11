@@ -1,5 +1,3 @@
-'use strict'
-
 const Transaction = require('../wallet/transaction')
 const Block = require('../DB/models/blocks')
 const { Transaction: TransactionModel } = require('../DB/models/transactions')
