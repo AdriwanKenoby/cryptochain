@@ -1,12 +1,6 @@
 const redis = require('redis')
 const Wallet = require('../wallet')
-
-const CHANNELS = {
-  TEST: 'TEST',
-  BLOCKCHAIN: 'BLOCKCHAIN',
-  TRANSACTION: 'TRANSACTION',
-  ADDRESS: 'ADDRESS'
-}
+const { ChannelType } = require('../utils')
 
 class PubSub {
   constructor ({ blockchain, transactionPool, io, redisUrl }) {
@@ -24,7 +18,7 @@ class PubSub {
     const parsedMessage = JSON.parse(message)
 
     switch (channel) {
-      case CHANNELS.BLOCKCHAIN:
+      case ChannelType.BLOCKCHAIN:
         this.blockchain.replaceChain(parsedMessage, true, () => {
           this.transactionPool.clearBlockchainTransactions({ chain: parsedMessage })
         })
@@ -32,11 +26,11 @@ class PubSub {
         this.io.emit('blocks')
         this.io.emit('wallet')
         break
-      case CHANNELS.TRANSACTION:
+      case ChannelType.TRANSACTION:
         this.transactionPool.setTransaction(parsedMessage)
         this.io.emit('transaction')
         break
-      case CHANNELS.ADDRESS:
+      case ChannelType.ADDRESS:
         parsedMessage.map(address => Wallet.knownAddresses.set(address[0], address[1]))
         this.io.emit('newAddress')
         break
@@ -47,7 +41,7 @@ class PubSub {
   }
 
   subscribeToChannels () {
-    Object.values(CHANNELS).forEach(channel => {
+    Object.values(ChannelType).forEach(channel => {
       this.subscriber.subscribe(channel)
     })
   }
@@ -57,15 +51,15 @@ class PubSub {
   }
 
   broadcastAddresses () {
-    this.publish({ channel: CHANNELS.ADDRESS, message: JSON.stringify(Array.from(Wallet.knownAddresses)) })
+    this.publish({ channel: ChannelType.ADDRESS, message: JSON.stringify(Array.from(Wallet.knownAddresses)) })
   }
 
   broadcastChain () {
-    this.publish({ channel: CHANNELS.BLOCKCHAIN, message: JSON.stringify(this.blockchain.chain) })
+    this.publish({ channel: ChannelType.BLOCKCHAIN, message: JSON.stringify(this.blockchain.chain) })
   }
 
   broadcastTransaction (transaction) {
-    this.publish({ channel: CHANNELS.TRANSACTION, message: JSON.stringify(transaction) })
+    this.publish({ channel: ChannelType.TRANSACTION, message: JSON.stringify(transaction) })
   }
 }
 
